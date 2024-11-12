@@ -11,27 +11,14 @@ import {
   Container,
   styled,
 } from "@mui/material";
-import charPatterns from "../data/chartPattern"; 
+import charPatterns from "../data/chartPattern";
 
 const StyledContainer = styled(Container)({
   padding: "24px",
   maxWidth: "1000px !important",
 });
 
-const ColorButton = styled(IconButton)<{ color: string; isSelected: boolean }>(
-  ({ color, isSelected }) => ({
-    width: "40px",
-    height: "40px",
-    backgroundColor: color,
-    margin: "0 8px",
-    border: isSelected ? "3px solid #fff" : "none",
-    boxShadow: isSelected ? "0 0 10px rgba(255,255,255,0.5)" : "none",
-    "&:hover": {
-      backgroundColor: color,
-      opacity: 0.8,
-    },
-  })
-);
+
 
 const LedGrid = styled(Box)({
   display: "grid",
@@ -184,12 +171,31 @@ const LedTextDisplay: React.FC = () => {
         </Typography>
         <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
           {colors.map((color) => (
-            <ColorButton
+            // <ColorButton
+            //   key={color}
+            //   color={color}
+            //   isSelected={selectedColor === color}
+            //   onClick={() => setSelectedColor(color)}
+            //   disabled={isRandomColor}
+            // />
+
+            <IconButton
               key={color}
-              color={color}
-              isSelected={selectedColor === color}
               onClick={() => setSelectedColor(color)}
-              disabled={isRandomColor}
+              sx={{
+                width: "40px",
+                height: "40px",
+                backgroundColor: color,
+                margin: "0 8px",
+                border: selectedColor === color ? "3px solid #fff" : "none",
+                boxShadow: selectedColor === color
+                  ? "0 0 10px rgba(255,255,255,0.5)"
+                  : "none",
+                "&:hover": {
+                  backgroundColor: color,
+                  opacity: 0.8,
+                },
+              }}
             />
           ))}
         </Box>
